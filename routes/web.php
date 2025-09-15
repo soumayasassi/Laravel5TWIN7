@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/acces-refuse', 'acces_refuse');
+Route::get('/advisor', [\App\Http\Controllers\AdvisorController::class, 'show'])
+->middleware('check-age');
+
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/home/{nom}', function ($nom) {
     echo "bonjour " . $nom  ;
